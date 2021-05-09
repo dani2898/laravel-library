@@ -20,6 +20,7 @@ class CreateBooksTable extends Migration
             $table->date('publication_date');
             $table->boolean('is_available');
             $table->foreignId('user_id')
+                ->nullable()
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
