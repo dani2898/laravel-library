@@ -14,7 +14,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Users</a>
+    <a  href="{{route('users.index')}}" class="nav-link active" aria-current="page" href="#">Users</a>
 </li>
 
 <li class="nav-item">

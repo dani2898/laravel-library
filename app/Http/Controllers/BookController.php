@@ -31,7 +31,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::all();
         return view('admin.books.new', compact('categories'));
     }
 

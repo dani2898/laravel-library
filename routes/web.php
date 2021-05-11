@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +30,7 @@ Route::get('/test', [BookController::class, 'show'])->name('test');
 
 Route::resource('/books', BookController::class);
 Route::resource('/categories', CategoryController::class);
+Route::resource('/users', UserController::class);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -55,7 +57,16 @@ Route::middleware([IsAdmin::class])->group(function () {
         Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
         Route::post('/{$id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
         Route::put('/{$id}', [CategoryController::class, 'update'])->name('categories.update');
-        Route::delete('/{$id}', [CategoryController::class, 'destroy'])->name('books.destroy');
+        Route::delete('/{$id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    });
+
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        Route::post('/{$id}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::put('/{$id}', [UserController::class, 'update'])->name('categories.update');
+        Route::delete('/{$id}', [UserController::class, 'destroy'])->name('users.destroy');
     });
 });
 
