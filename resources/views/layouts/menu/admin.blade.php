@@ -6,11 +6,11 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Books</a>
+    <a href="{{route('books.index')}}" class="nav-link active" aria-current="page" href="#">Books</a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Categories</a>
+    <a  href="{{route('categories.index')}}" class="nav-link active" aria-current="page" href="#">Categories</a>
 </li>
 
 <li class="nav-item">
@@ -18,7 +18,12 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Log out</a>
+    
+<div class="item">
+        <form action="{{route('logout')}}" method="post">
+            @csrf<button type="submit" class="item-dropdown nav-link active text-left" style="background: none; border: 0px;">
+               Log out</button></form>
+    </div>
 </li>
 
 @endsection

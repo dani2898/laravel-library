@@ -2,13 +2,11 @@
 @section('content-admin')
 
 <div class="card mt-4">
-    <div class="card-header">
-        Welcome {{auth()->user()->name}}
+    <div class="card-header fw-bold">
+        Welcome {{auth()->user()->name}} {{auth()->user()->last_name}}
     </div>
     <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <p class="card-text">Access to all of the system functions through the menu above.</p>
     </div>
 </div>
 @endsection
