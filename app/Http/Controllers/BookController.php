@@ -19,7 +19,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::with('category', 'user')->get();
+        $books = Book::paginate(5);
 
         return view('admin.books.books', compact('books'));
     }
@@ -31,7 +31,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(5);
         return view('admin.books.new', compact('categories'));
     }
 

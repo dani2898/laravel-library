@@ -13,20 +13,20 @@
                 <th scope="col">#</th>
                 <th scope="col-4">Category</th>
                 <th scope="col-4">Description</th>
-                <th scope="col" >Options</th>
+                <th scope="col">Options</th>
             </tr>
         </thead>
         <tbody>
-        <!-- {{$id=1}} -->
+            <!-- {{$id=1}} -->
             @foreach($categories as $category)<tr>
                 <th scope="row">{{$id++}}</th>
                 <td>{{$category->name}}</td>
                 <td>{{$category->description}}</td>
                 <td class="d-flex justify-content-evenly">
-                    <a href="{{route('books.edit', $category->id)}}"><button type="submit" class="btn btn-info btn-raised btn-sm" style="color:whitesmoke">
+                    <a href="{{route('categories.edit', $category->id)}}"><button type="submit" class="btn btn-info btn-raised btn-sm" style="color:whitesmoke">
                             <i class="fas fa-edit"></i> Edit
                         </button></a>
-                    <form action="{{route('books.destroy', $category->id)}}" method="POST">
+                    <form action="{{route('categories.destroy', $category->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-raised btn-sm">
@@ -41,6 +41,10 @@
             @endforeach
         </tbody>
     </table>
+</div>
+
+<div class="d-flex justify-content-center">
+    {!! $categories->links() !!}
 </div>
 
 @endsection
