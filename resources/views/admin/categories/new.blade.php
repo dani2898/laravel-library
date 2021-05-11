@@ -7,35 +7,19 @@
                 New category
             </div>
             <div class="card-body">
-                <form action="{{route('books.store')}}" method="POST">
+                <form action="{{route('categories.store')}}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="book_name" class="form-label">Category name</label>
-                        <input type="text" class="form-control" id="book_name" name="book_name" required>
+                        <label for="category_name" class="form-label">Category name</label>
+                        <input type="text" class="form-control" id="category_name" name="category_name" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="book_author" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="book_author" name="book_author" required>
+                        <label for="category_description" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="category_description" name="category_description" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="book_category" class="form-label">Book category</label>
-                        <select class="form-select" id="book_category" name="book_category" required>
-                            <option value="" disabled selected hidden>Select a category</option>
-                            @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="book_publication_date" class="form-label">Publication date</label>
-                        <input type="date" class="form-control" id="book_publication_date" name="book_publication_date" required>
-                    </div>
-
-
-                    <button type="submit" class="btn btn-primary ms-auto">Submit</button>
+                    <button type="submit" class="btn btn-primary col-md-3 offset-md-9">Submit</button>
                 </form>
             </div>
         </div>

@@ -35,7 +35,8 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-primary ms-auto">Submit</button>
+                    <button type="submit" class="btn btn-primary col-md-3 offset-md-9">Submit</button>
+                    
                 </form>
             </div>
         </div>
