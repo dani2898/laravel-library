@@ -6,6 +6,9 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class BookController extends Controller
 {
@@ -16,6 +19,9 @@ class BookController extends Controller
      */
     public function index()
     {
+        $books = Book::with('category', 'user')->get();
+
+        return view('admin.books.books', compact('books'));
     }
 
     /**
@@ -25,7 +31,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('admin.books.new', compact('categories'));
     }
 
     /**
@@ -36,7 +43,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = new Book;
+        $book->name       = $request->book_name;
+        $book->author       = $request->book_author;
+        $book->publication_date = $request->book_publication_date;
+        $book->is_available = 1;
+        $book->category_id = $request->book_category;
+        $book->save();
+
+        // redirect
+        Session::flash('message', 'Successfully created book!');
+        return redirect()->route('books.index');
     }
 
     /**
@@ -57,7 +74,11 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $book = Book::with('category')->where('id', $book->id)->first();
+        $categories = Category::all();
+        return view('admin.books.edit')
+            ->with('book', $book)
+            ->with('categories', $categories);
     }
 
     /**
@@ -67,10 +88,19 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
-        //
+        $book = Book::find($id);
+        $book->name = $request->book_name;
+        $book->author = $request->book_author;
+        $book->publication_date = $request->book_publication_date;
+        $book->category_id = $request->book_category;
+        $book->save();
+
+        return redirect()->route('books.index');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -78,8 +108,10 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        //
+        Book::find($id)->delete();
+        return redirect()->route('books.index');
+        
     }
 }
