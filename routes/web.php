@@ -46,13 +46,16 @@ Route::middleware([IsAdmin::class])->group(function () {
         Route::post('/store', [BookController::class, 'store'])->name('books.store');
         Route::post('/{$id}/edit', [BookController::class, 'edit'])->name('books.edit');
         Route::put('/{$id}', [BookController::class, 'update'])->name('books.update');
-        Route::delete('/{$id}', [BookController::class, 'update'])->name('books.destroy');
+        Route::delete('/{$id}', [BookController::class, 'destroy'])->name('books.destroy');
     });
 
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
-
+        Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
+        Route::post('/{$id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+        Route::put('/{$id}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::delete('/{$id}', [CategoryController::class, 'destroy'])->name('books.destroy');
     });
 });
 

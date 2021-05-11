@@ -15,12 +15,12 @@
                 <th scope="col">Author</th>
                 <th scope="col">Category</th>
                 <th scope="col">Publication date</th>
-                <th scope="col">Borrowed by</th>
+                <th scope="col">Status</th>
                 <th scope="col" colspan="2">Options</th>
             </tr>
         </thead>
         <tbody>
-        <!-- {{$id=1}} -->
+            <!-- {{$id=1}} -->
             @foreach($books as $book)<tr>
                 <th scope="row">{{$id++}}</th>
                 <td>{{$book->name}}</td>
@@ -28,12 +28,14 @@
                 <td>{{$book->category->name}}</td>
                 <td>{{$book->publication_date}}</td>
                 @if($book->user!=null)
-                <td>{{$book->user->name}} {{$book->user->last_name}}</td>
+                <td>Borrowed</td>
                 @else
                 <td>Available</td>
                 @endif
                 <td class="d-flex justify-content-evenly">
-                    <a><button type="submit" class="btn btn-success btn-raised btn-sm">
+                    <a>
+                        <button type="button" class="btn btn-primary btn-success btn-raised btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal">
+
                             <i class="fas fa-handshake"></i> Lend
                         </button></a>
                     <a href="{{route('books.edit', $book->id)}}"><button type="submit" class="btn btn-info btn-raised btn-sm" style="color:whitesmoke">
@@ -52,8 +54,32 @@
 
             </tr>
             @endforeach
+             
         </tbody>
     </table>
+</div>
+
+<div class="d-flex justify-content-center">
+                {!! $books->links() !!}
+            </div> 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 @endsection
