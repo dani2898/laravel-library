@@ -17,19 +17,21 @@ $(document).ready(function () {
         bLengthChange: false,
         bFilter: true,
         bInfo: false,
+        drawCallback: function () {
+            $(".dataTables_paginate ").addClass(
+                " d-flex justify-content-center"
+            );
+            $(".paginate_button").addClass("btn btn-light");
+        },
     });
     $("input[type='search']").addClass("form-control");
-    $(".dataTables_paginate ").addClass(" d-flex justify-content-center");
-    $(".paginate_button").addClass("btn btn-light");
 
-   
     $("select").selectize();
 });
 
 window.send_id_to_modal = function ($id) {
     document.getElementById("book_id").value = $id;
     document.getElementById("book_id_return").value = $id;
-    
 };
 
 window.send_id_to_modal_category = function ($id) {

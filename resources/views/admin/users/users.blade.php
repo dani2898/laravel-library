@@ -2,11 +2,11 @@
 @section('content-admin')
 
 @if(Session::has('alert'))
-<div class="alert alert-{{ Session::get('alert.type') }} alert dismissible mt-4" role="alert">
+<div class="alert alert-{{Session::get('alert.type') }} alert dismissible mt-4" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
-    {{ Session::get('alert.text') }}
+    {{Session::get('alert.message') }}
 </div>
 @endif
 
@@ -57,7 +57,6 @@
 </div>
 
 <div class="d-flex justify-content-center">
-    {!! $users->links() !!}
 </div>
 
 

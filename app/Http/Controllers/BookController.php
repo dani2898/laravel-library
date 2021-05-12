@@ -20,7 +20,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate(5);
+        $books = Book::all();
         $users = User::where('is_admin', 2)->get();
        
             return view('admin.books.books', compact('books', 'users'));
@@ -55,7 +55,7 @@ class BookController extends Controller
         $book->save();
 
         // redirect
-        $request->session()->flash('alert', ['type' => 'primary', 'text' => 'Book added succesfully!']);
+        $request->session()->flash('alert', ['type' => 'primary', 'message' => 'Book added succesfully!']);
         return redirect()->route('books.index');
     }
 
@@ -101,7 +101,7 @@ class BookController extends Controller
         $book->category_id = $request->book_category;
         $book->save();
 
-        $request->session()->flash('alert', ['type' => 'success', 'text' => 'Book updated succesfully!']);
+        $request->session()->flash('alert', ['type' => 'success', 'message' => 'Book updated succesfully!']);
 
         return redirect()->route('books.index');
     }
@@ -117,7 +117,7 @@ class BookController extends Controller
     public function destroy(Request $request, $id)
     {
         Book::find($request->book_id_delete)->delete();
-        $request->session()->flash('alert', ['type' => 'danger', 'text' => 'Book deleted succesfully!']);
+        $request->session()->flash('alert', ['type' => 'danger', 'message' => 'Book deleted succesfully!']);
         return redirect()->route('books.index');
     }
 }
