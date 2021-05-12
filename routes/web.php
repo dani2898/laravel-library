@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LendBookController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
@@ -31,6 +32,7 @@ Route::get('/test', [BookController::class, 'show'])->name('test');
 Route::resource('/books', BookController::class);
 Route::resource('/categories', CategoryController::class);
 Route::resource('/users', UserController::class);
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -68,6 +70,9 @@ Route::middleware([IsAdmin::class])->group(function () {
         Route::put('/{$id}', [UserController::class, 'update'])->name('categories.update');
         Route::delete('/{$id}', [UserController::class, 'destroy'])->name('users.destroy');
     });
+
+        Route::put('/lend', [LendBookController::class, 'update'])->name('lend.update');
+        Route::put('/lend-return', [LendBookController::class, 'return_book'])->name('lend.return');
 });
 
 Route::middleware([IsUser::class])->group(function () {

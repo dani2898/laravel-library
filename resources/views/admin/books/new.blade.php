@@ -21,7 +21,7 @@
 
                     <div class="mb-3">
                         <label for="book_category" class="form-label">Book category</label>
-                        <select class="form-select" id="book_category" name="book_category" required>
+                        <select class="form-select" id="book_categories" name="book_categories" required>
                             <option value="" disabled selected hidden>Select a category</option>
                             @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>

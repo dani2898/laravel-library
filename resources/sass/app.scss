@@ -6,3 +6,11 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.dataTables_filter, .dataTables_length{
+    display: inline-block;
+}
+
+.dataTables_filter{
+    float: right;
+}

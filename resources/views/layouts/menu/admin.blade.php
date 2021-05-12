@@ -2,7 +2,7 @@
 @section('options')
 
 <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Home</a>
+    <a href="{{route('admin')}}" class="nav-link active" aria-current="page" href="#">Home</a>
 </li>
 
 <li class="nav-item">

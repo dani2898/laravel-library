@@ -10,7 +10,6 @@
     <table class="table table-bordered">
         <thead class="table-dark">
             <tr>
-                <th scope="col">#</th>
                 <th scope="col-4">Category</th>
                 <th scope="col-4">Description</th>
                 <th scope="col">Options</th>
@@ -19,10 +18,9 @@
         <tbody>
             <!-- {{$id=1}} -->
             @foreach($categories as $category)<tr>
-                <th scope="row">{{$id++}}</th>
                 <td>{{$category->name}}</td>
                 <td>{{$category->description}}</td>
-                <td class="d-flex justify-content-evenly">
+                <td class="d-flex justify-content-around">
                     <a href="{{route('categories.edit', $category->id)}}"><button type="submit" class="btn btn-info btn-raised btn-sm" style="color:whitesmoke">
                             <i class="fas fa-edit"></i> Edit
                         </button></a>

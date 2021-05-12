@@ -10,7 +10,6 @@
     <table class="table table-bordered">
         <thead class="table-dark">
             <tr>
-                <th scope="col">#</th>
                 <th scope="col-4">Name</th>
                 <th scope="col-4">E-mail</th>
                 <th scope="col-4">Rol</th>
@@ -20,7 +19,6 @@
         <tbody>
             <!-- {{$id=1}} -->
             @foreach($users as $user)<tr>
-                <th scope="row">{{$id++}}</th>
                 <td>{{$user->name}} {{$user->last_name}}</td>
                 <td>{{$user->email}}</td>
                 <td>@if($user->is_admin==1)
@@ -29,7 +27,7 @@
                     User
                     @endif
                 </td>
-                <td class="d-flex justify-content-evenly">
+                <td class="d-flex justify-content-around">
                     <a href="{{route('users.edit', $user->id)}}"><button type="submit" class="btn btn-info btn-raised btn-sm" style="color:whitesmoke">
                             <i class="fas fa-edit"></i> Edit
                         </button></a>

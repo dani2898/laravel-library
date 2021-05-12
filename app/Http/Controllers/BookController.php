@@ -20,8 +20,8 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::paginate(5);
-
-        return view('admin.books.books', compact('books'));
+        $users = User::where('is_admin', 2)->get();
+        return view('admin.books.books', compact('books', 'users'));
     }
 
     /**
