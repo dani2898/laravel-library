@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
+        $users = User::where('id', '!=', Auth::user()->id)->get();
 
         return view('admin.users.users', compact('users'));
     }
@@ -56,7 +57,7 @@ class UserController extends Controller
         $user->is_admin = $request->user_type;
         $user->save();
 
-        $request->session()->flash('alert', ['type' => 'primary', 'text' => 'User added succesfully!']);
+        $request->session()->flash('alert', ['type' => 'primary', 'message' => 'User added succesfully!']);
         return redirect()->route('users.index');
     }
 
@@ -98,7 +99,7 @@ class UserController extends Controller
         $user->is_admin = $request->user_type;
         $user->save();
 
-        $request->session()->flash('alert', ['type' => 'success', 'text' => 'User updated succesfully!']);
+        $request->session()->flash('alert', ['type' => 'success', 'message' => 'User updated succesfully!']);
 
         return redirect()->route('users.index');
     }
@@ -112,7 +113,7 @@ class UserController extends Controller
     public function destroy(Request $request, $id)
     {
         User::find($request->user_id)->delete();
-        $request->session()->flash('alert', ['type' => 'danger', 'text' => 'User deleted succesfully!']);
+        $request->session()->flash('alert', ['type' => 'danger', 'message' => 'User deleted succesfully!']);
         return redirect()->route('users.index');
     }
 }

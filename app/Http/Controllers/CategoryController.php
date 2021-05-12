@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::all();
 
         return view('admin.categories.categories', compact('categories'));
     }
@@ -42,7 +42,7 @@ class CategoryController extends Controller
         $category->description = $request->category_description;
         $category->save();
 
-        $request->session()->flash('alert', ['type' => 'primary', 'text' => 'Category added succesfully!']);
+        $request->session()->flash('alert', ['type' => 'primary', 'message' => 'Category added succesfully!']);
 
         return redirect()->route('categories.index');
     }
@@ -84,7 +84,7 @@ class CategoryController extends Controller
         $category->description = $request->category_description;
         $category->save();
 
-        $request->session()->flash('alert', ['type' => 'success', 'text' => 'Category updated succesfully!']);
+        $request->session()->flash('alert', ['type' => 'success', 'message' => 'Category updated succesfully!']);
         return redirect()->route('categories.index');
     }
 
@@ -97,7 +97,7 @@ class CategoryController extends Controller
     public function destroy(Request $request, $id)
     {
         Category::find($request->category_id)->delete();
-        $request->session()->flash('alert', ['type' => 'danger', 'text' => 'Category deleted succesfully!']);
+        $request->session()->flash('alert', ['type' => 'danger', 'message' => 'Category deleted succesfully!']);
         return redirect()->route('categories.index');
     }
 }
