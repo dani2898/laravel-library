@@ -38,7 +38,7 @@
                         <div class="mb-3">
                         <label for="user_type" class="form-label">User Type</label>
                         <select class="form-select" id="user_type" name="user_type" required>
-                            <option value="" disabled selected hidden>Select a category</option>
+                            <option value="" disabled selected hidden>Select a role</option>
                             <option value="1">Admin</option>
                             <option value="2">User</option>
                         </select>
