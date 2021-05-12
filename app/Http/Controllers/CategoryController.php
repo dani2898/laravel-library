@@ -41,9 +41,10 @@ class CategoryController extends Controller
         $category->name = $request->category_name;
         $category->description = $request->category_description;
         $category->save();
-        
-        return redirect()->route('categories.index');
 
+        $request->session()->flash('alert', ['type' => 'primary', 'text' => 'Category added succesfully!']);
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -83,6 +84,7 @@ class CategoryController extends Controller
         $category->description = $request->category_description;
         $category->save();
 
+        $request->session()->flash('alert', ['type' => 'success', 'text' => 'Category updated succesfully!']);
         return redirect()->route('categories.index');
     }
 
@@ -92,9 +94,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        Category::find($id)->delete();
+        Category::find($request->category_id)->delete();
+        $request->session()->flash('alert', ['type' => 'danger', 'text' => 'Category deleted succesfully!']);
         return redirect()->route('categories.index');
     }
 }

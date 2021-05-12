@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\Input;
@@ -21,7 +22,9 @@ class BookController extends Controller
     {
         $books = Book::paginate(5);
         $users = User::where('is_admin', 2)->get();
-        return view('admin.books.books', compact('books', 'users'));
+       
+            return view('admin.books.books', compact('books', 'users'));
+       
     }
 
     /**
@@ -48,11 +51,11 @@ class BookController extends Controller
         $book->author       = $request->book_author;
         $book->publication_date = $request->book_publication_date;
         $book->is_available = 1;
-        $book->category_id = $request->book_category;
+        $book->category_id = $request->book_categories;
         $book->save();
 
         // redirect
-        Session::flash('message', 'Successfully created book!');
+        $request->session()->flash('alert', ['type' => 'primary', 'text' => 'Book added succesfully!']);
         return redirect()->route('books.index');
     }
 
@@ -90,12 +93,15 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $book = Book::find($id);
         $book->name = $request->book_name;
         $book->author = $request->book_author;
         $book->publication_date = $request->book_publication_date;
         $book->category_id = $request->book_category;
         $book->save();
+
+        $request->session()->flash('alert', ['type' => 'success', 'text' => 'Book updated succesfully!']);
 
         return redirect()->route('books.index');
     }
@@ -108,10 +114,10 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        Book::find($id)->delete();
+        Book::find($request->book_id_delete)->delete();
+        $request->session()->flash('alert', ['type' => 'danger', 'text' => 'Book deleted succesfully!']);
         return redirect()->route('books.index');
-        
     }
 }

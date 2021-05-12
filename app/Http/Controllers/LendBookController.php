@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LendBookController extends Controller
 {
@@ -14,7 +15,10 @@ class LendBookController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = Auth::user()->id;
+        $books =  Book::where('user_id', $user_id)->get();
+
+        return view('user.books', compact('books'));
     }
 
     /**

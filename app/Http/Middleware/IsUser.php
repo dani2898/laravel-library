@@ -19,6 +19,7 @@ class IsUser
         if (auth()->user()->is_admin == '2') {
             return $next($request);
         }
-        abort(403);
+        return redirect()->route('login');
+        
     }
 }

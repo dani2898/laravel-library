@@ -56,6 +56,7 @@ class UserController extends Controller
         $user->is_admin = $request->user_type;
         $user->save();
 
+        $request->session()->flash('alert', ['type' => 'primary', 'text' => 'User added succesfully!']);
         return redirect()->route('users.index');
     }
 
@@ -90,16 +91,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate(request(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        ]);
         $user = User::find($id);
         $user->name = $request->name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->is_admin = $request->user_type;
         $user->save();
+
+        $request->session()->flash('alert', ['type' => 'success', 'text' => 'User updated succesfully!']);
 
         return redirect()->route('users.index');
     }
@@ -110,9 +109,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        User::find($id)->delete();
+        User::find($request->user_id)->delete();
+        $request->session()->flash('alert', ['type' => 'danger', 'text' => 'User deleted succesfully!']);
         return redirect()->route('users.index');
     }
 }

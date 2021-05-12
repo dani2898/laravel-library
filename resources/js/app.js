@@ -12,17 +12,34 @@ require("selectize");
 import "selectize/dist/css/selectize.css";
 
 $(document).ready(function () {
-    $("#books_table").DataTable({
+    $("table").DataTable({
         bPaginate: true,
         bLengthChange: false,
         bFilter: true,
         bInfo: false,
     });
     $("input[type='search']").addClass("form-control");
+    $(".dataTables_paginate ").addClass(" d-flex justify-content-center");
+    $(".paginate_button").addClass("btn btn-light");
+
+   
     $("select").selectize();
 });
 
-window.send_id_to_modal = function ($book_id) {
-    document.getElementById("book_id").value = $book_id;
-    document.getElementById("book_id_return").value = $book_id;
+window.send_id_to_modal = function ($id) {
+    document.getElementById("book_id").value = $id;
+    document.getElementById("book_id_return").value = $id;
+    
+};
+
+window.send_id_to_modal_category = function ($id) {
+    document.getElementById("category_id").value = $id;
+};
+
+window.send_id_to_modal_delete_book = function ($id) {
+    document.getElementById("book_id_delete").value = $id;
+};
+
+window.send_id_to_modal_user = function ($id) {
+    document.getElementById("user_id").value = $id;
 };

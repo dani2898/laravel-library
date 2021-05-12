@@ -1,6 +1,15 @@
 @extends('layouts.menu.admin')
 @section('content-admin')
 
+@if(Session::has('alert'))
+<div class="alert alert-{{ Session::get('alert.type') }} alert dismissible mt-4" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ Session::get('alert.text') }}
+</div>
+@endif
+
 <div class="row mt-4">
     <a href="{{route('books.create')}}" class=" col-2 ml-auto mr-2<">
         <button type="button" class="btn btn-primary  w-100">Add book</button>
@@ -27,9 +36,9 @@
                     <td>{{$book->category->name}}</td>
                     <td>{{$book->publication_date}}</td>
                     @if($book->user!=null)
-                    <td>Borrowed</td>
+                    <td class="text-danger font-weight-bold">Borrowed</td>
                     @else
-                    <td>Available</td>
+                    <td class="text-success font-weight-bold">Available</td>
                     @endif
                     <td class="d-flex justify-content-around">
                         @if(($book->is_available)==1)
@@ -44,13 +53,9 @@
                         <a href="{{route('books.edit', $book->id)}}"><button type="submit" class="btn btn-info btn-raised btn-sm" style="color:whitesmoke">
                                 Edit
                             </button></a>
-                        <form action="{{route('books.destroy', $book->id)}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-raised btn-sm">
-                                Delete
-                            </button>
-                        </form>
+                        <button type="submit" onclick="send_id_to_modal_delete_book('{{$book->id}}')" type="button" class="btn btn-danger btn-success btn-raised btn-sm " data-toggle="modal" data-target="#modal_delete">
+                            Delete
+                        </button>
 
                     </td>
                     </td>
@@ -101,7 +106,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal return -->
 <div class="modal fade" id="return_modal" tabindex="-1" aria-labelledby="modal_return_label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -119,6 +124,39 @@
                     <input type="text" id="available_id_return" name="available_id_return" value="1" hidden>
                     <div class="mb-3">
                         <label for="user_id" class="form-label">Are you sure you want to return the book?</label>
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary col-3 mr-2">Yes</button>
+
+                        <button type="button" class=" btn btn-danger col-3 mr-2" data-dismiss="modal">
+                            No
+                        </button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="modal_delete_label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_delete_label">Delete book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('books.destroy', 0)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="text" id="book_id_delete" name="book_id_delete" hidden>
+                    <div class="mb-3">
+                        <label for="user_id" class="form-label">Are you sure you want to delete this book?</label>
                     </div>
                     <div class="row d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary col-3 mr-2">Yes</button>

@@ -29,6 +29,9 @@ class HomeController extends Controller
         else if (auth()->user()->is_admin == '2') {
             return redirect()->route('user');
         }
+        else{
+        return redirect()->route('login');
+        }
 
         
     }

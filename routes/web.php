@@ -67,7 +67,7 @@ Route::middleware([IsAdmin::class])->group(function () {
         Route::get('/create', [UserController::class, 'create'])->name('users.create');
         Route::post('/store', [UserController::class, 'store'])->name('users.store');
         Route::post('/{$id}/edit', [UserController::class, 'edit'])->name('users.edit');
-        Route::put('/{$id}', [UserController::class, 'update'])->name('categories.update');
+        Route::put('/{$id}', [UserController::class, 'update'])->name('users.update'); 
         Route::delete('/{$id}', [UserController::class, 'destroy'])->name('users.destroy');
     });
 
@@ -76,5 +76,11 @@ Route::middleware([IsAdmin::class])->group(function () {
 });
 
 Route::middleware([IsUser::class])->group(function () {
-    Route::get('/user', [App\Http\Controllers\HomeController::class, 'index'])->name('user');
+    Route::get('/user', function () {
+        return view('user.index');
+    })->name('user');
+
+    Route::prefix('my-books')->group(function () {
+        Route::get('/', [LendBookController::class, 'index'])->name('my_books.index');
+    });
 });
