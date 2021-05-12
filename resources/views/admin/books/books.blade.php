@@ -72,7 +72,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modal_lend_label">Lend a book</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form action="{{route('lend.update')}}" method="POST">
@@ -105,7 +107,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modal_return_label">Return book</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form action="{{route('lend.return')}}" method="POST">
@@ -116,8 +120,14 @@
                     <div class="mb-3">
                         <label for="user_id" class="form-label">Are you sure you want to return the book?</label>
                     </div>
+                    <div class="row d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary col-3 mr-2">Yes</button>
 
-                    <button type="submit" class="btn btn-primary col-md-3 offset-md-9">Submit</button>
+                        <button type="button" class=" btn btn-danger col-3 mr-2" data-dismiss="modal">
+                            No
+                        </button>
+
+                    </div>
 
                 </form>
             </div>
