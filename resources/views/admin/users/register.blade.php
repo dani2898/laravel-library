@@ -22,17 +22,17 @@
 
                         <div class="mb-3">
                             <label for="email" class="form-label">E-mail Address</label>
-                            <input type="text" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password"  placeholder="Password must be 8 characters" required>
                         </div>
                        
                         <div class="mb-3">
                             <label for="password_confirm" class="form-label">Password confirmation</label>
-                            <input type="password" class="form-control" id="password_confirm" name="password_confirmation" required>
+                            <input type="password" class="form-control" id="password_confirm"  name="password_confirmation" required>
                         </div>
 
                         <div class="mb-3">
